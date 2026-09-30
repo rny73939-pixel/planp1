@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>1 ปีของรอน สู่การเป็น AI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;700&family=Prompt:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--card:#0D0D0D;--ink:#F4F4F4;--mut:#8C8C8C;--line:#1F1F1F;--acc:#fff;--cell:#171717;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 "IBM Plex Sans Thai",system-ui,"Noto Sans Thai",Tahoma,sans-serif}
+h1,h2,h3,.top b{font-family:Prompt,"IBM Plex Sans Thai",system-ui,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:0 18px 50px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0;border-bottom:1px solid var(--line)}
+.top b{font-size:18px}
+.chip{background:#EDEDED;color:#000;border-radius:999px;padding:6px 18px;font-size:14px;font-weight:500}
+.shell{display:grid;grid-template-columns:230px 1fr;gap:34px;padding-top:26px}
+#tabs{display:flex;flex-direction:column;gap:6px}
+.side button{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:none;border:0;color:var(--ink);padding:11px 16px;border-radius:999px;font:inherit;font-size:15px;cursor:pointer}
+.side button.on{background:#fff;color:#000}
+.side svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.foot{margin-top:18px}
+.side .ghost{width:auto;border:1px solid var(--line);color:var(--mut);font-size:13px;padding:6px 14px}
+.panel{display:none}.panel.on{display:block}
+h1{font-size:clamp(30px,5.5vw,52px);line-height:1.2;margin:0 0 6px;font-weight:700}
+h2{font-size:18px;margin:26px 0 10px;font-weight:600}
+.cols h2:first-child,.acth h2{margin-top:6px}
+h3{font-size:16px;margin:0 0 6px;font-weight:600}
+p{margin:0;color:var(--mut)}
+a{color:#fff}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:10px;margin:22px 0 8px}
+.tile{background:var(--card);border-radius:14px;padding:16px 10px 12px;text-align:center;display:flex;flex-direction:column;gap:2px}
+.tile b{font-size:19px;font-weight:600}
+.tile span{font-size:13px;color:var(--mut)}
+.tile i{display:block;height:3px;background:var(--cell);border-radius:2px;margin-top:10px;overflow:hidden}
+.tile u{display:block;height:100%;background:#fff;text-decoration:none}
+.acth{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:22px}
+.legend{display:flex;gap:14px;font-size:13px;color:var(--mut)}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;background:var(--cell);vertical-align:-1px}
+.legend .lh,#grid .h{background:#6E6E6E}.legend .ld,#grid .d{background:#fff}
+.gridwrap{overflow-x:auto;padding:8px 0 6px}
+.gw{width:max-content}
+#grid{display:grid;grid-template-rows:repeat(7,13px);grid-auto-flow:column;grid-auto-columns:13px;gap:3px}
+#grid span{border-radius:3px;background:var(--cell)}
+#grid .f{opacity:.5}
+#grid .t{outline:2px solid #fff;outline-offset:1px}
+#ml{display:grid;grid-auto-flow:column;grid-auto-columns:13px;gap:3px;margin-top:8px;font-size:12px;color:var(--mut)}
+#ml span{white-space:nowrap}
+#today{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+#today p{grid-column:1/-1;background:var(--card);border-radius:14px;padding:14px 16px}
+.chk{display:flex;gap:14px;align-items:center;padding:14px 16px;background:var(--card);border:1px solid var(--line);border-radius:14px;cursor:pointer}
+.chk.on{border-color:#6E6E6E}
+.chk.on span{text-decoration:line-through;color:var(--mut)}
+input[type=checkbox]{width:22px;height:22px;accent-color:#fff;flex:none}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:26px;align-items:start}
+.subtabs{display:flex;gap:22px;margin-bottom:4px}
+.subtabs button{background:none;border:0;border-bottom:2px solid transparent;color:var(--mut);padding:4px 0;font:inherit;cursor:pointer}
+.subtabs button.on{color:#fff;border-color:#fff}
+.scroll{overflow-x:auto;background:var(--card);border-radius:14px}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:520px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-weight:500;color:var(--mut);font-size:14px}
+tr.now td{background:rgba(255,255,255,.09);font-weight:500}
+tr.dn td:not(:first-child){color:var(--mut);text-decoration:line-through}
+.phase{background:var(--card);border-radius:14px;padding:16px 20px;margin:12px 0}
+.phase>h3{font-size:17px}
+.month{padding:10px 0;border-top:1px solid var(--line)}
+.month.cur h3::after{content:"เดือนนี้";margin-left:10px;background:#fff;color:#000;font-size:12px;padding:2px 10px;border-radius:999px;font-weight:500}
+.month label{display:flex;gap:10px;align-items:flex-start;padding:3px 0;cursor:pointer}
+.month label input{margin-top:4px;width:18px;height:18px}
+.month label.on span{color:var(--mut);text-decoration:line-through}
+details{background:var(--card);border-radius:14px;padding:12px 18px;margin:10px 0}
+details[open]{border:1px solid #3A3A3A}
+summary{cursor:pointer;display:flex;gap:6px 14px;flex-wrap:wrap;align-items:baseline}
+summary span{color:var(--mut);font-size:14px}
+details p{margin:8px 0}
+details p.fin{color:var(--ink)}
+.pl{display:flex;gap:10px;padding:3px 0;cursor:pointer;align-items:flex-start}
+.pl input{margin-top:4px;width:18px;height:18px}
+.pl.on span{color:var(--mut);text-decoration:line-through}
+ul{margin:0;padding-left:22px}li{margin:6px 0}
+:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media (max-width:820px){.shell{grid-template-columns:1fr;gap:16px}#tabs{flex-direction:row;overflow-x:auto}.side button{width:auto;white-space:nowrap;padding:9px 14px}.foot{margin-top:10px}}
+</style>
+</head>
+<body>
+<main>
+<header class="top"><b>แผน 1 ปีสู่ AI Engineer</b><span class="chip" id="chip"></span></header>
+<div class="shell">
+<aside class="side"><nav id="tabs" aria-label="เมนู"><button data-p="p-overview" class="on"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>ภาพรวม</button><button data-p="p-week"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>ตารางเรียน</button><button data-p="p-plan"><svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>แผนการเรียน</button><button data-p="p-proj"><svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg>โปรเจกต์</button><button data-p="p-practice"><svg viewBox="0 0 24 24"><path d="M4 4h14a2 2 0 012 2v14H6a2 2 0 01-2-2z"/><path d="M8 8h8M8 12h6"/></svg>ฝึกโจทย์</button><button data-p="p-extra"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg>เช็กพอยต์และทักษะเสริม</button></nav><p class="foot"><button class="ghost" id="reset">ล้างความคืบหน้า</button></p></aside>
+<div class="content">
+<section class="panel on" id="p-overview">
+<h1>1 ปีจากศูนย์สู่ AI Engineer</h1>
+<p>5 ต.ค. 2026 ถึง 4 ต.ค. 2027</p>
+<div class="tiles" id="rings"></div>
+<div class="acth"><h2>กิจกรรมตลอดปี</h2><div class="legend"><span><i></i>ยังไม่ทำ</span><span><i class="lh"></i>ทำบางข้อ</span><span><i class="ld"></i>ครบทั้งวัน</span></div></div>
+<div class="gridwrap"><div class="gw"><div id="grid"></div><div id="ml"></div></div></div>
+<h2 id="s-today">วันนี้ต้องทำ</h2>
+<div class="today" id="today"></div>
+
+</section>
+<section class="panel" id="p-week"><div class="cols"><div><h2 id="s-week">ตารางประจำสัปดาห์ (ประมาณ 12 ชม.)</h2>
+<div class="scroll"><table id="week">
+<tr><th>วัน</th><th>เวลาเรียน</th><th>ฝึกเอง</th></tr>
+<tr data-d="1"><td>จันทร์</td><td>08:00–11:50, 13:00–14:50</td><td>19:00–20:45 โค้ด 60, คณิต 30, อ่าน 15</td></tr>
+<tr data-d="2"><td>อังคาร</td><td>09:00–11:50 (ออนไลน์)</td><td>19:00–20:45 โค้ด 60, คณิต 30, อ่าน 15</td></tr>
+<tr data-d="3"><td>พุธ</td><td>10:00–11:50, 13:00–16:50</td><td>19:00–20:45 โค้ด 60, คณิต 30, อ่าน 15</td></tr>
+<tr data-d="4"><td>พฤหัสฯ</td><td>09:00–11:50 (ออนไลน์)</td><td>19:00–20:45 โค้ด 60, คณิต 30, อ่าน 15</td></tr>
+<tr data-d="5"><td>ศุกร์</td><td>10:00–11:50, 13:00–14:50</td><td>19:00–20:45 โค้ด 60, คณิต 30, อ่าน 15</td></tr>
+<tr data-d="6"><td>เสาร์</td><td>-</td><td>09:00–11:30 โปรเจกต์หรือโจทย์ยาก 2 ชม., อ่าน 30 นาที</td></tr>
+<tr data-d="0"><td>อาทิตย์</td><td>-</td><td>19:00–20:00 ทบทวนข้อที่ผิด และวางแผนสัปดาห์หน้า</td></tr>
+</table></div>
+<p style="margin-top:8px;font-size:14px">เรียนเลิกไม่เกิน 17:00 ทุกวัน ช่วงหัวค่ำจึงว่างตลอด ช่วงโค้ดวันพุธและศุกร์ ให้ทำโจทย์วิชา Programming Fundamental ส่วนช่วงคณิตวันจันทร์และศุกร์ ให้ทบทวนวิชาพื้นฐานทางคณิตศาสตร์สำหรับการคำนวณ</p>
+
+</div><div><h2>สอบปลายภาค</h2>
+<ul id="exams">
+<li data-d="2026-10-15">15 ต.ค. Sexual Literacy 09:00–12:00</li>
+<li data-d="2026-10-31">31 ต.ค. English for Communication 08:00–11:00</li>
+<li data-d="2026-11-02">2 พ.ย. Mathematical Foundations of Computing 13:00–16:00</li>
+<li data-d="2026-11-03">3 พ.ย. Physical Well-being 13:00–15:00 (ออนไลน์)</li>
+<li data-d="2026-11-05">5 พ.ย. Psychological Well-being 09:00–12:00 (ออนไลน์)</li>
+<li data-d="2026-11-06">6 พ.ย. Programming Fundamental 09:00–12:00</li>
+</ul>
+
+</div></div></section>
+<section class="panel" id="p-plan"><div class="subtabs"><button class="on" data-sub="w">รายสัปดาห์</button><button data-sub="m">รายเดือน</button></div>
+<div data-sp="w"><h2>แผนรายสัปดาห์ (ช่วงที่ 1)</h2>
+<div class="scroll" id="weeks"></div>
+
+</div><div data-sp="m" hidden><h2 id="s-plan">แผนรายเดือน</h2>
+<div id="plan"></div>
+
+</div></section>
+<section class="panel" id="p-proj"><h2 id="s-proj">โปรเจกต์ที่ควรทำ (8 ชิ้น)</h2>
+<p style="margin-bottom:8px">ทำตามลำดับ ติ๊กทุกขั้นตอนถึงนับว่าจบโปรเจกต์ และอัปทุกชิ้นขึ้น GitHub พร้อม README</p>
+<div id="proj"></div>
+
+</section>
+<section class="panel" id="p-practice"><div class="cols"><div><h2 id="s-practice">แหล่งฝึกโจทย์และข้อสอบ Python</h2>
+<p style="margin-bottom:8px">ทำวันละ 3–5 ข้อ ลองเองก่อนดูเฉลย และจดข้อที่ผิดลงสมุด</p>
+<h3>ช่วงที่ 1 (ตอนนี้): เริ่มต้น</h3>
+<ul>
+<li><a href="https://codingbat.com/python" target="_blank" rel="noopener">CodingBat</a>: โจทย์สั้น กดตรวจคำตอบได้ทันที แบ่งหมวด if, loop, string, list</li>
+<li><a href="https://www.w3schools.com/python/python_exercises.asp" target="_blank" rel="noopener">W3Schools Python Exercises</a>: แบบฝึกหัดและควิซตามหัวข้อ</li>
+<li><a href="https://pynative.com/python-exercises-with-solutions/" target="_blank" rel="noopener">PYnative Python Exercises</a>: แยกตามหัวข้อ มีเฉลย</li>
+</ul>
+<h3>ช่วงที่ 1–2: ระดับถัดไป</h3>
+<ul>
+<li><a href="https://www.hackerrank.com/domains/python" target="_blank" rel="noopener">HackerRank (Python)</a>: มีเส้นทางสำหรับมือใหม่ ระบบตรวจให้</li>
+<li><a href="https://exercism.org/tracks/python" target="_blank" rel="noopener">Exercism (Python track)</a>: ฟรี โจทย์เรียงตามระดับ</li>
+</ul>
+<h3>ช่วงที่ 2 เป็นต้นไป: อัลกอริทึม</h3>
+<ul>
+<li><a href="https://www.codewars.com" target="_blank" rel="noopener">Codewars</a>: เริ่มที่ระดับ 8 kyu</li>
+<li><a href="https://leetcode.com/problemset/" target="_blank" rel="noopener">LeetCode</a>: เริ่มที่ระดับ Easy</li>
+</ul>
+<h3>สำหรับสอบวิชาที่เรียน</h3>
+<ul>
+<li>ข้อสอบเก่าจากอาจารย์หรือรุ่นพี่ ตรงกับข้อสอบจริงที่สุด</li>
+<li>โจทย์ท้ายสไลด์ของทุกสัปดาห์ (Week 12 มี 5 ข้อสำหรับเขียนฟังก์ชัน และ 5 ข้อสำหรับเรียกใช้ฟังก์ชัน)</li>
+</ul>
+
+</div><div><h2>แหล่งเรียนและหนังสือ</h2>
+<ul>
+<li><b>Python:</b> Automate the Boring Stuff with Python (อ่านฟรีออนไลน์)</li>
+<li><b>คณิต:</b> Khan Academy (พีชคณิต), 3Blue1Brown (Linear Algebra และ Calculus)</li>
+<li><b>อัลกอริทึม:</b> Grokking Algorithms</li>
+<li><b>Machine Learning:</b> Machine Learning Specialization ของ Andrew Ng, หนังสือ Hands-On Machine Learning ของ Aurélien Géron</li>
+<li><b>Deep Learning:</b> fast.ai Practical Deep Learning, PyTorch Tutorials</li>
+</ul>
+
+<h2>กติกา 3 ข้อ</h2>
+<ul>
+<li>ติดแล้วลองเองก่อน 10 นาที แล้วค่อยถามหรือดูเฉลย</li>
+<li>จดข้อที่ผิดบ่อยไว้ในสมุดเล่มเดียว</li>
+<li>พลาดหนึ่งวันไม่เป็นไร แต่ห้ามพลาดสองวันติด</li>
+</ul>
+</div></div>
+<h2 style="margin-top:26px">สมุดข้อที่ผิดบ่อย</h2>
+<p style="margin-bottom:8px">จดข้อที่ผิดพร้อมสาเหตุ (บันทึกอัตโนมัติ) ทบทวนทุกวันอาทิตย์</p>
+<textarea id="notes" rows="7" placeholder="เช่น 12 ต.ค. while ลืมอัปเดตตัวนับ -> วนไม่รู้จบ" style="width:100%;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit"></textarea></section>
+<section class="panel" id="p-extra"><h1 style="font-size:clamp(24px,4vw,36px)">สิ่งที่แผนเดิมยังขาด</h1>
+<p>เพิ่มเช็กพอยต์วัดผลทุกไตรมาส ทักษะที่งานสาย AI ใช้จริง และการเตรียมสมัครงาน</p>
+<div id="extra"></div></section>
+</div></div>
+</main>
+<script>
+const START=new Date(2026,9,5),DAY=864e5;
+const n=new Date(),T=new Date(n.getFullYear(),n.getMonth(),n.getDate());
+const idx=Math.round((T-START)/DAY),cl=Math.min(364,Math.max(0,idx));
+const dk=i=>{const d=new Date(2026,9,5+i);return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()};
+let st={days:{},goals:{}};
+try{const r=localStorage.getItem('ron-plan-v1');if(r)st=JSON.parse(r)}catch(e){}
+let ref=null;
+const save=()=>{try{localStorage.setItem('ron-plan-v1',JSON.stringify(st))}catch(e){}
+ if(ref){ref.set({json:JSON.stringify(st)}).catch(()=>{})}};
+const done=i=>{const a=st.days[dk(i)];return !!a&&a.length==3&&a.every(Boolean)};
+const P=[
+["ฐานราก (ต.ค.–ธ.ค. 2026)",[
+["ต.ค.","Python: ตัวแปร if ลูป","คณิต: เลขติดลบ เศษส่วน สมการง่าย","ทำโจทย์โค้ดครบ 30 ข้อ"],
+["พ.ย.","Python: list dict function","พีชคณิต: แก้สมการ ฟังก์ชัน กราฟ","ทำโปรแกรมเล็ก 1 ชิ้น เช่น เครื่องคิดเลข"],
+["ธ.ค.","อ่านเขียนไฟล์ และจัดการ error","ตรรกศาสตร์ และเซต","ทำโจทย์โค้ดสะสมครบ 100 ข้อ"]]],
+["โครงสร้างข้อมูล (ม.ค.–มี.ค. 2027)",[
+["ม.ค.","Git, GitHub และ OOP พื้นฐาน","เวกเตอร์และเมทริกซ์","อัปโปรเจกต์แรกขึ้น GitHub"],
+["ก.พ.","stack, queue และการค้นหา","พีชคณิตเชิงเส้น: คูณเมทริกซ์","ทำโจทย์อัลกอริทึม 30 ข้อ"],
+["มี.ค.","sorting และ Big-O","ความน่าจะเป็นพื้นฐาน","ทำโปรเจกต์ที่ 2 เช่น เกมเดาเลข"]]],
+["Data และ Machine Learning (เม.ย.–มิ.ย. 2027)",[
+["เม.ย.","NumPy และ Pandas","สถิติ: ค่าเฉลี่ย ส่วนเบี่ยงเบน","วิเคราะห์ dataset 1 ชุด"],
+["พ.ค.","Matplotlib และ scikit-learn","อนุพันธ์เบื้องต้น","ทำโมเดล regression หรือ classification 1 ตัว"],
+["มิ.ย.","ประเมินโมเดล และ overfitting","แคลคูลัส: gradient","ทำโปรเจกต์ ML 1 ชิ้น"]]],
+["Deep Learning และผลงาน (ก.ค.–ก.ย. 2027)",[
+["ก.ค.","PyTorch เบื้องต้น","ทฤษฎี neural network","เทรนโมเดลแรก เช่น MNIST"],
+["ส.ค.","Computer Vision หรือ NLP เบื้องต้น","ใช้ LLM API","โปรเจกต์พอร์ตโฟลิโอชิ้นที่ 1"],
+["ก.ย.","Deploy เดโม","ปรับ GitHub และเขียนเรซูเม่","โปรเจกต์พอร์ตโฟลิโอชิ้นที่ 2 และสรุปทั้งปี"]]]
+];
+const mi=Math.min(11,Math.max(0,(T.getFullYear()-2026)*12+T.getMonth()-9));
+const TH=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+function draw(){
+ let h='',m='',pm=-1;
+ for(let i=0;i<365;i++){const a=st.days[dk(i)]||[],n=a.filter(Boolean).length;
+  h+='<span class="'+(n==3?'d':n?'h':'')+(i>cl||idx<0?' f':'')+(i==idx?' t':'')+'"></span>'}
+ for(let j=0;j<53;j++){const mo=new Date(2026,9,5+j*7).getMonth();m+='<span>'+(mo!=pm?TH[mo]:'')+'</span>';pm=mo}
+ document.getElementById('grid').innerHTML=h;
+ document.getElementById('ml').innerHTML=m;
+ document.getElementById('chip').textContent=idx<0?'เริ่มอีก '+(-idx)+' วัน':'วันที่ '+(cl+1)+' / 365';
+ rings();
+}
+function today(){
+ const a=st.days[dk(cl)]||[false,false,false];
+ const L=['โค้ด 60 นาที','คณิต 30 นาที','อ่านหรือทบทวน 15 นาที'];
+ const el=document.getElementById('today');
+ if(idx<0){el.innerHTML='<p>แผนเริ่มวันจันทร์ที่ 5 ต.ค. ช่วงนี้อ่านทบทวนสอบ Programming Fundamental และคณิตก่อน</p>';return}
+ el.innerHTML=L.map((t,j)=>'<label class="chk'+(a[j]?' on':'')+'"><input type="checkbox" data-j="'+j+'"'+(a[j]?' checked':'')+'><span>'+t+'</span></label>').join('');
+ el.querySelectorAll('input').forEach(x=>x.onchange=()=>{
+  const b=st.days[dk(cl)]||[false,false,false];b[+x.dataset.j]=x.checked;st.days[dk(cl)]=b;save();today();draw()});
+}
+const W=[
+["5–11 ต.ค.","ตัวแปร, input/print, ตัวดำเนินการ","เลขติดลบ, เศษส่วน","พื้นที่วงกลม, แปลง °C เป็น °F"],
+["12–18 ต.ค.","if/elif/else, and/or/not","ทศนิยม, เปอร์เซ็นต์","ตัดเกรด, เลขคู่/คี่, เลขมากสุดในสามตัว"],
+["19–25 ต.ค.","for และ range","สมการเชิงเส้น","สูตรคูณ, ผลรวม 1–100, นับเลขคู่"],
+["26 ต.ค.–1 พ.ย.","while, break","ทบทวนสอบคณิต (สอบ 2 พ.ย.)","เกมเดาเลข, รับเลขจนใส่ 0 แล้วหาผลรวม"],
+["2–8 พ.ย.","ทบทวนสอบโปรแกรมมิ่ง (สอบ 6 พ.ย.)","พักเบาๆ","โจทย์ท้ายสไลด์ Week 12 ทั้ง 5 ข้อ"],
+["9–15 พ.ย.","string: slice, method","พีชคณิต, แยกตัวประกอบ","นับสระ, กลับข้อความ, palindrome"],
+["16–22 พ.ย.","list","ฟังก์ชันและกราฟ","ค่าเฉลี่ย, ลบตัวซ้ำ, เรียงลำดับ"],
+["23–29 พ.ย.","dict และ tuple","ระบบสมการ","นับคำในประโยค, สมุดโทรศัพท์"],
+["30 พ.ย.–6 ธ.ค.","ฟังก์ชันเชิงลึก: default, *args, scope","เลขยกกำลัง, ลอการิทึมเบื้องต้น","เครื่องคิดเลขด้วยฟังก์ชัน"],
+["7–13 ธ.ค.","อ่านเขียนไฟล์, try/except","ลำดับและอนุกรม","โปรแกรมจดบันทึกลงไฟล์"],
+["14–20 ธ.ค.","โปรเจกต์เล็ก","ทบทวนคณิต","โปรแกรมจดรายรับรายจ่าย"],
+["21–27 ธ.ค.","ทดสอบตัวเอง","ทดสอบตัวเอง","โจทย์รวม 20 ข้อ ไม่ดูเฉลย"],
+["28 ธ.ค.–3 ม.ค.","เก็บตกหัวข้อที่ยังไม่แน่น","เก็บตก","ทำซ้ำข้อที่เคยผิด"]
+];
+const X=[
+["เช็กพอยต์ทุกไตรมาส","ใช้วัดว่าเรียนเข้าใจจริง ไม่ใช่แค่ติ๊กครบ",[
+"ธ.ค.: เขียนโปรแกรมไม่เกิน 100 บรรทัดได้เองโดยไม่ดูเฉลย และเช็กว่าทำโจทย์ครบ 100 ข้อ",
+"มี.ค.: อธิบาย Big-O ของ sort/search ได้ และมี 2 repo บน GitHub",
+"มิ.ย.: ทำ pipeline ตั้งแต่โหลดข้อมูลจนเทรนและประเมินโมเดลได้เอง",
+"ก.ย.: แอป AI เดโมเปิดผ่านลิงก์ได้ และพร้อมอธิบายทุกส่วนในการสัมภาษณ์"]],
+["ทักษะที่แผนยังไม่ครอบคลุม","หัวข้อที่งาน AI Engineer ใช้บ่อย แนะนำแทรกตามช่วงเวลา",[
+"Terminal และ Linux เบื้องต้น (cd, ls, grep, pip, venv) — ทำช่วง ม.ค. คู่กับ Git",
+"SQL เบื้องต้น (SELECT, WHERE, JOIN, GROUP BY) — ทำช่วง มี.ค.–เม.ย. ก่อนเริ่ม Pandas",
+"อ่านเอกสารและบทความภาษาอังกฤษวันละ 10 นาที (docs ของ Python, PyTorch)",
+"Kaggle: สมัครบัญชี ทำ Titanic และเข้าร่วมแข่งระดับ Getting Started 1 รายการ — พ.ค.–มิ.ย.",
+"Docker เบื้องต้น และ REST API ด้วย FastAPI — ก.ค.–ส.ค.",
+"พื้นฐาน LLM: prompt, embeddings, RAG — ส.ค. ก่อนทำแอปเดโม",
+"เขียนเลขคณิต ML ด้วยมือ: ลองคำนวณ gradient descent 3 รอบด้วยกระดาษ — มิ.ย."]],
+["เตรียมสมัครฝึกงานและงาน","เริ่มเตรียมตั้งแต่ ก.ค. เพื่อให้ทันสมัครปลายปี",[
+"GitHub profile README และปักหมุด 3 repo ที่ดีที่สุด",
+"เรซูเม่หน้าเดียว ภาษาไทยและอังกฤษ ใส่ลิงก์ GitHub และเดโม",
+"LinkedIn: รูป ประวัติย่อ และโปรเจกต์ที่ทำ",
+"เขียนบล็อกหรือโพสต์สรุปโปรเจกต์อย่างน้อย 2 ชิ้น",
+"ซ้อมสัมภาษณ์: อธิบายโปรเจกต์ใน 3 นาที และตอบคำถาม Python/ML พื้นฐาน",
+"ส่งใบสมัครฝึกงานหรือตำแหน่ง Junior อย่างน้อย 5 ที่"]]];
+function extra(){
+ document.getElementById('extra').innerHTML=X.map((g,i)=>'<div class="phase"><h3>'+g[0]+'</h3><p style="margin-bottom:6px;font-size:14px">'+g[1]+'</p>'+g[2].map((t,j)=>{const k='x'+i+'-'+j,on=st.goals[k];return '<label class="pl'+(on?' on':'')+'"><input type="checkbox" data-x="'+k+'"'+(on?' checked':'')+'><span>'+t+'</span></label>'}).join('')+'</div>').join('');
+ document.querySelectorAll('#extra input').forEach(x=>x.onchange=()=>{st.goals[x.dataset.x]=x.checked;save();extra()});
+ rings();
+}
+function rings(){
+ let c=0,n=0;for(let i=0;i<365;i++)if(done(i))c++;
+ let q=done(cl)?cl:cl-1;while(q>=0&&done(q)){n++;q--}
+ const p=idx<0?0:(cl+1)/365;
+ let g=0;for(const k in st.goals)if(st.goals[k]&&/^\d+-\d+$/.test(k))g++;
+ let w=0;for(let i=0;i<W.length;i++)if(st.goals['w'+i])w++;
+ let xt=0,xc=0;X.forEach((g,a)=>g[2].forEach((_,b)=>{xt++;if(st.goals['x'+a+'-'+b])xc++}));let pj=0;for(let i=0;i<PJ.length;i++)if(PJ[i].s.every((_,j)=>st.goals['p'+i+'-'+j]))pj++;
+ const R=[[Math.round(p*100)+'%','เวลาที่ผ่านไป',p],[c+' วัน','ทำครบทั้งวัน',c/365],[n+' วัน','ติดต่อกัน',n/7],[g+'/36','เป้าหมายรายเดือน',g/36],[w+'/'+W.length,'แผนรายสัปดาห์',w/W.length],[pj+'/'+PJ.length,'โปรเจกต์ที่เสร็จ',pj/PJ.length],[xc+'/'+xt,'ทักษะเสริม',xc/xt]];
+ document.getElementById('rings').innerHTML=R.map(r=>'<div class="tile"><b>'+r[0]+'</b><span>'+r[1]+'</span><i><u style="width:'+Math.min(100,r[2]*100).toFixed(0)+'%"></u></i></div>').join('');
+}
+function weeks(){
+ const cw=idx<0?-1:Math.floor(idx/7);
+ document.getElementById('weeks').innerHTML='<table><tr><th></th><th>สัปดาห์</th><th>Python</th><th>คณิต</th><th>โจทย์ฝึก</th></tr>'+W.map((w,i)=>{const on=st.goals['w'+i];return '<tr class="'+(i==cw?'now ':'')+(on?'dn':'')+'"><td><input type="checkbox" data-w="'+i+'"'+(on?' checked':'')+' aria-label="เสร็จสัปดาห์ที่ '+(i+1)+'"></td><td>'+(i+1)+'. '+w[0]+'</td><td>'+w[1]+'</td><td>'+w[2]+'</td><td>'+w[3]+'</td></tr>'}).join('')+'</table>';
+ document.querySelectorAll('#weeks input').forEach(x=>x.onchange=()=>{st.goals['w'+x.dataset.w]=x.checked;save();weeks()});
+ rings();
+}
+const PJ=[
+{t:"เกมเดาเลข",m:"ต.ค.–พ.ย.",w:"ฝึกตัวแปร if while random และการแยกฟังก์ชัน เป็นโปรเจกต์แรกที่ทำได้จริงจากพื้นฐานล้วนๆ",s:["สุ่มเลข 1–100 ด้วย random.randint แล้วเก็บไว้ในตัวแปร","ใช้ while วนรับตัวเลขที่ผู้เล่นเดา","บอกว่ามากไป น้อยไป หรือถูก ด้วย if/elif/else","นับจำนวนครั้งที่เดา และจำกัดไม่เกิน 7 ครั้ง","ถามว่าจะเล่นอีกไหม แล้วเริ่มเกมใหม่ได้","แยกโค้ดเป็นฟังก์ชัน เช่น play_game() และ ask_guess()"],d:"เล่นได้ครบทุกกรณี และอธิบายโค้ดทุกบรรทัดได้"},
+{t:"โปรแกรมจดรายรับรายจ่าย",m:"ธ.ค.",w:"ฝึก list dict การอ่านเขียนไฟล์ และ try/except กับงานที่ใช้ได้จริงในชีวิตประจำวัน",s:["ทำเมนู 1 เพิ่มรายการ 2 ดูรายการ 3 สรุปยอด 4 ออก","เก็บแต่ละรายการเป็น dict (วันที่ ประเภท จำนวนเงิน หมายเหตุ)","คำนวณยอดรวมรายรับ รายจ่าย และเงินคงเหลือ","บันทึกข้อมูลลงไฟล์ JSON ทุกครั้งที่เพิ่มรายการ","โหลดไฟล์ตอนเปิดโปรแกรม (ถ้ายังไม่มีไฟล์ให้เริ่มว่าง)","ใช้ try/except กันผู้ใช้กรอกตัวเลขผิด"],d:"ปิดแล้วเปิดใหม่ ข้อมูลยังอยู่ และกรอกผิดแล้วโปรแกรมไม่พัง"},
+{t:"To-do list และ GitHub",m:"ม.ค.",w:"ฝึก OOP เบื้องต้น และใช้ Git กับ GitHub ซึ่งเป็นทักษะที่ทุกงานสาย AI ต้องใช้",s:["สร้าง class Task (ชื่องาน สถานะ)","ทำเมนู เพิ่ม ลบ ทำเสร็จ ดูทั้งหมด","บันทึกและโหลดข้อมูลจากไฟล์","สร้างบัญชี GitHub และ repo แรก","ใช้ git add, commit, push (commit อย่างน้อย 5 ครั้ง)","เขียน README: โปรแกรมทำอะไร และรันยังไง"],d:"คนอื่นเปิด repo แล้วรันตาม README ได้"},
+{t:"ระบบคะแนนนักเรียน",m:"ก.พ.–มี.ค.",w:"ฝึก OOP การค้นหา การเรียงลำดับ และ Big-O ซึ่งเป็นพื้นฐานของการเขียนโค้ดให้มีประสิทธิภาพ",s:["สร้าง class Student เก็บชื่อ รหัส และคะแนนแต่ละวิชา","คำนวณเกรดเฉลี่ยของแต่ละคน","ค้นหานักเรียนจากรหัส","เรียงลำดับตามเกรดเฉลี่ย โดยเขียน bubble sort เอง","หาคะแนนสูงสุด ต่ำสุด และค่าเฉลี่ยของทั้งห้อง","เขียนอธิบายสั้นๆ ว่าทำไม sort ที่เขียนเองช้ากว่า sorted()"],d:"ทดสอบกับนักเรียน 20 คนแล้วผลถูกต้อง"},
+{t:"วิเคราะห์ข้อมูลด้วย Pandas (Titanic)",m:"เม.ย.",w:"ฝึก Pandas Matplotlib และสถิติเบื้องต้น ชุดข้อมูล Titanic หาโหลดฟรีได้จาก Kaggle",s:["โหลดไฟล์ CSV แล้วดู head(), info(), describe()","หาค่าที่หาย (missing) และเลือกวิธีจัดการพร้อมเหตุผล","ตอบ 5 คำถาม เช่น เพศไหนรอดมากกว่า ชั้นโดยสารมีผลไหม","ทำกราฟอย่างน้อย 3 แบบด้วย Matplotlib","เขียนสรุปข้อค้นพบ 5 ข้อใน Jupyter Notebook"],d:"คนที่ไม่รู้เรื่องข้อมูลอ่าน Notebook แล้วเข้าใจผลได้"},
+{t:"โมเดล ML แรก: ทำนายผู้รอดชีวิต",m:"พ.ค.–มิ.ย.",w:"ต่อจากโปรเจกต์ 5 ฝึก scikit-learn การแยก train/test และการประเมินโมเดล",s:["เตรียมข้อมูลและแปลงข้อความเป็นตัวเลข","แบ่งข้อมูล train/test (เช่น 80/20)","เทรนโมเดล 2 แบบ เช่น Logistic Regression และ Decision Tree","วัดผลด้วย accuracy และดู confusion matrix","เทียบคะแนน train กับ test เพื่อเช็ค overfitting","เขียนสรุปว่าโมเดลไหนดีกว่า เพราะอะไร"],d:"อธิบายได้ว่า accuracy แปลว่าอะไร และทำไมต้องแยกชุดทดสอบ"},
+{t:"จำแนกตัวเลขเขียนมือ (MNIST)",m:"ก.ค.",w:"โปรเจกต์ Deep Learning แรก ฝึก PyTorch และ neural network",s:["โหลดชุดข้อมูล MNIST ด้วย torchvision","สร้าง neural network ง่ายๆ 2–3 ชั้น","เขียน training loop (loss, optimizer, epoch)","วาดกราฟ loss ต่อ epoch","วัด accuracy บนชุดทดสอบ (เป้าหมายเกิน 95%)","ลองปรับ 1 อย่าง เช่น จำนวนชั้น แล้วเทียบผล"],d:"อธิบายได้ว่า loss, epoch, gradient คืออะไรด้วยภาษาง่ายๆ"},
+{t:"แอป AI เดโม (ผลงานพอร์ตโฟลิโอ)",m:"ส.ค.–ก.ย.",w:"โปรเจกต์ปิดปี รวมทุกอย่างที่เรียนมา และเป็นผลงานที่ใช้โชว์ตอนสมัครฝึกงานหรือทำงาน",s:["เลือกโจทย์ 1 อย่างที่สนใจ เช่น แชตบอทตอบคำถามจากเอกสาร หรือจัดหมวดข้อความ","เรียกใช้ LLM API จากโค้ด Python","ทำหน้าเว็บด้วย Streamlit หรือ Gradio","จัดการ error และไม่เก็บ API key ไว้ในโค้ด","deploy ให้เปิดผ่านลิงก์ได้","เขียน README มีภาพหน้าจอ วิธีใช้ และสิ่งที่เรียนรู้"],d:"ส่งลิงก์ให้เพื่อนเปิดใช้ได้เอง และมีโค้ดอยู่ใน GitHub"}
+];
+function proj(){
+ const prev=[...document.querySelectorAll('#proj details')].map(d=>d.open);
+ const o=PJ.findIndex((q,i)=>!q.s.every((_,j)=>st.goals['p'+i+'-'+j]));
+ document.getElementById('proj').innerHTML=PJ.map((q,i)=>{const n=q.s.filter((_,j)=>st.goals['p'+i+'-'+j]).length,op=prev.length?prev[i]:i==o;
+  return '<details'+(op?' open':'')+'><summary><b>โปรเจกต์ '+(i+1)+': '+q.t+'</b><span>เดือน '+q.m+'</span><span>'+n+'/'+q.s.length+' ขั้นตอน</span></summary><p>'+q.w+'</p>'+q.s.map((t,j)=>{const k='p'+i+'-'+j,on=st.goals[k];return '<label class="pl'+(on?' on':'')+'"><input type="checkbox" data-p="'+k+'"'+(on?' checked':'')+'><span>'+t+'</span></label>'}).join('')+'<p class="fin"><b>เสร็จเมื่อ:</b> '+q.d+'</p></details>'}).join('');
+ document.querySelectorAll('#proj input').forEach(x=>x.onchange=()=>{st.goals[x.dataset.p]=x.checked;save();proj()});
+ rings();
+}
+function plan(){
+ document.getElementById('plan').innerHTML=P.map((p,pi)=>'<div class="phase"><h3>'+p[0]+'</h3>'+p[1].map((m,j)=>{
+  const k=pi*3+j;return '<div class="month'+(k==mi?' cur':'')+'"><h3>'+m[0]+'</h3>'+m.slice(1).map((t,q)=>{
+   const key=k+'-'+q,on=st.goals[key];
+   return '<label class="'+(on?'on':'')+'"><input type="checkbox" data-k="'+key+'"'+(on?' checked':'')+'><span>'+t+'</span></label>'}).join('')+'</div>'}).join('')+'</div>').join('');
+ document.querySelectorAll('#plan input').forEach(x=>x.onchange=()=>{st.goals[x.dataset.k]=x.checked;save();plan()});
+ weeks();proj();
+}
+document.querySelectorAll('#week tr[data-d]').forEach(r=>{if(r.dataset.d.split(',').includes(String(n.getDay())))r.className='now'});
+document.querySelectorAll('li[data-d]').forEach(l=>{const p=l.dataset.d.split('-'),c=Math.round((new Date(+p[0],p[1]-1,+p[2])-T)/DAY);l.append(c>=0?' (อีก '+c+' วัน)':' (ผ่านแล้ว)')});
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{
+ document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('on',x==b));
+ document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on',x.id==b.dataset.p))});
+document.querySelectorAll('.subtabs button').forEach(b=>b.onclick=()=>{
+ const g=b.parentElement;g.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x==b));
+ g.parentElement.querySelectorAll('[data-sp]').forEach(d=>d.hidden=d.dataset.sp!=b.dataset.sub)});
+document.getElementById('reset').onclick=()=>{if(confirm('ล้างความคืบหน้าทั้งหมด?')){st={days:{},goals:{}};nt.value='';save();draw();today();plan();extra()}};
+const nt=document.getElementById('notes');nt.value=st.notes||'';nt.oninput=()=>{st.notes=nt.value;save()};
+draw();today();plan();extra();
+(async()=>{try{
+ if(!window.claude)return;
+ const db=await claude.use("db"),user=await claude.use("user");
+ if(!db||!user)return;
+ const id=await user.id();if(!id)return;
+ const r=db.collection("data/users/"+id).doc("progress");
+ const s=await r.get();
+ if(s.exists){try{const o=JSON.parse(s.data().json);
+  for(const d in o.days){const a=st.days[d]||[false,false,false];st.days[d]=o.days[d].map((v,j)=>v||a[j])}
+  for(const g in o.goals){if(o.goals[g])st.goals[g]=true}
+  if(o.notes&&!st.notes){st.notes=o.notes;nt.value=o.notes}}catch(e){}}
+ ref=r;save();draw();today();plan();extra();
+}catch(e){}})();
+</script>
+</body>
+</html>
